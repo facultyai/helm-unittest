@@ -41,6 +41,7 @@ asserts:
 		"a.b.c": "ABC",
 		"x.y.z": "XYZ",
 	})
+	a.Equal(tj.ChartMetadata.Version, "")
 	assertions := make([]*Assertion, 2)
 	yaml.Unmarshal([]byte(`
   - equal:
@@ -51,6 +52,22 @@ asserts:
       pattern: /z/
 `), &assertions)
 	a.Equal(tj.Assertions, assertions)
+}
+
+func TestUnmarshalableJobWithChartMetaFromYAML(t *testing.T) {
+	manifest := `
+it: should do something
+chartMetadata:
+  version: 0.1.5
+`
+
+	var tj TestJob
+	err := yaml.Unmarshal([]byte(manifest), &tj)
+
+	a := assert.New(t)
+	a.Nil(err)
+	a.Equal(tj.Name, "should do something")
+	a.Equal(tj.ChartMetadata.Version, "0.1.5")
 }
 
 func TestRunJobOk(t *testing.T) {
