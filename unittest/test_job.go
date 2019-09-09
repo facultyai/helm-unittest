@@ -131,9 +131,7 @@ func (t *TestJob) renderChart(targetChart *chart.Chart, userValues []byte) (map[
 	config := &chart.Config{Raw: string(userValues), Values: map[string]*chart.Value{}}
 	options := *t.releaseOption()
 
-	if t.ChartMetadata.Version != "" {
-		targetChart.Metadata.Version = t.ChartMetadata.Version
-	}
+	t.addChartMetadata(targetChart)
 
 	vals, err := chartutil.ToRenderValues(targetChart, config, options)
 	if err != nil {
@@ -147,6 +145,13 @@ func (t *TestJob) renderChart(targetChart *chart.Chart, userValues []byte) (map[
 	}
 
 	return outputOfFiles, nil
+}
+
+// amend chart values with metadata
+func (t *TestJob) addChartMetadata(targetChart *chart.Chart) {
+	if t.ChartMetadata.Version != "" {
+		targetChart.Metadata.Version = t.ChartMetadata.Version
+	}
 }
 
 // get chartutil.ReleaseOptions ready for render
