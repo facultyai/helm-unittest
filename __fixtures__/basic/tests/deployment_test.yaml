@@ -44,3 +44,14 @@ tests:
           count: 2
       - matchSnapshot:
           path: spec
+  - it: should get chart metadata
+    values:
+      - ./values/image.yaml
+    chartMetadata:
+      version: 0.1.2
+    set:
+      service.internalPort: 8080
+    asserts:
+      - equal:
+          path: metadata.labels.chart
+          value: basic-0.1.2
