@@ -1,0 +1,9 @@
+suite: test deployment with chart version
+templates:
+  - deployment.yaml
+tests:
+  - it: should get chart metadata
+    values:
+      - ./values/image.yaml
+    chartMetadata:
+      version: 0.1.2
