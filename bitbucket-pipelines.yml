@@ -15,7 +15,7 @@ pipelines:
 
             # Install
             - cd "${PACKAGE_PATH}"
-            - dep ensure -v
+            - dep ensure -v -vendor-only
 
             # Test
             - dep status -v
