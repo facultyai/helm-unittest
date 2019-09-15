@@ -20,3 +20,4 @@ pipelines:
             # Test
             - dep status -v
             - go test -v ./unittest/...
+            - test -z $(gofmt -l unittest)
