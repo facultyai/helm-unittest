@@ -66,6 +66,9 @@ tests:
   - **revision**: *string, optional*. The revision of current build, default to `0`.
   - **isUpgrade**: *bool, optional*. Whether the build is an upgrade, default to `false`.
 
+- **chartMetadata**: *object, optional*. Add/amend entries to the `{{ .Chart }}` object.
+  - **version**: *string, optional*. The version number. Default to the value in `Chart.yaml`.
+
 - **asserts**: *array of assertion, required*. The assertions to validate the rendered chart, check [Assertion](#assertion).
 
 ## Assertion

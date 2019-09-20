@@ -42,6 +42,9 @@ type TestJob struct {
 		Revision  int
 		IsUpgrade bool
 	}
+	ChartMetadata struct {
+		Version string
+	} `yaml:"chartMetadata"`
 	// route indicate which chart in the dependency hierarchy
 	// like "parant-chart", "parent-charts/charts/child-chart"
 	chartRoute string
@@ -128,6 +131,8 @@ func (t *TestJob) renderChart(targetChart *chart.Chart, userValues []byte) (map[
 	config := &chart.Config{Raw: string(userValues), Values: map[string]*chart.Value{}}
 	options := *t.releaseOption()
 
+	t.addChartMetadata(targetChart)
+
 	vals, err := chartutil.ToRenderValues(targetChart, config, options)
 	if err != nil {
 		return nil, err
@@ -140,6 +145,13 @@ func (t *TestJob) renderChart(targetChart *chart.Chart, userValues []byte) (map[
 	}
 
 	return outputOfFiles, nil
+}
+
+// amend chart values with metadata
+func (t *TestJob) addChartMetadata(targetChart *chart.Chart) {
+	if t.ChartMetadata.Version != "" {
+		targetChart.Metadata.Version = t.ChartMetadata.Version
+	}
 }
 
 // get chartutil.ReleaseOptions ready for render
