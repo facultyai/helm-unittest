@@ -1,11 +1,8 @@
 # helm unittest
 
-This repository is forked from [lrills/helm-unittest](https://github.com/lrills/helm-unittest).
-
 Unit test for *helm chart* in YAML to keep your chart consistent and robust!
 
 Feature:
-
   - write test file in pure YAML
   - render locally with no need of *tiller*
   - create **nothing** on your cluster
