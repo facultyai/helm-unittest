@@ -13,24 +13,40 @@ Feature:
 
 If you are ready for writing tests, check the [DOCUMENT](./DOCUMENT.md) for the test API in YAML.
 
-- [Install](#install)
-- [Get Started](#get-started)
-- [Test Suite File](#test-suite-file)
-- [Usage](#usage)
-  - [Flags](#flags)
-- [Example](#example)
-- [Snapshot Testing](#snapshot-testing)
-- [Related Projects / Commands](#related-projects--commands)
-- [Contributing](#contributing)
+- [helm unittest](#helm-unittest)
+  - [Documentation](#documentation)
+  - [Install](#install)
+  - [Get Started](#get-started)
+  - [Test Suite File](#test-suite-file)
+  - [Usage](#usage)
+    - [Flags](#flags)
+  - [Example](#example)
+  - [Snapshot Testing](#snapshot-testing)
+  - [Tests within subchart](#tests-within-subchart)
+  - [Related Projects / Commands](#related-projects--commands)
+  - [License](#license)
+  - [Contributing](#contributing)
 
 
 ## Install
 
+Download the tarball from [github releases](https://github.com/facultyai/helm-unittest/releases):
+
 ```
-$ helm plugin install https://github.com/lrills/helm-unittest
+wget https://github.com/facultyai/helm-unittest/releases/download/v0.1.5-faculty-1/helm-unittest-macos-0.1.5-faculty-1.tgz
 ```
 
-It will install the latest version of binary into helm plugin directory.
+Extract the tarball:
+
+```
+tar -xzvf helm-unittest-macos-0.1.5-faculty-1.tgz
+```
+
+Move the extracted binary to your path, e.g. `~/bin` and rename it to `helm-unittest`:
+
+```
+mv untt ~/bin/helm-unittest
+```
 
 ## Get Started
 
