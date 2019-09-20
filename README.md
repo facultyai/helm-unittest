@@ -13,24 +13,42 @@ Feature:
 
 If you are ready for writing tests, check the [DOCUMENT](./DOCUMENT.md) for the test API in YAML.
 
-- [Install](#install)
-- [Get Started](#get-started)
-- [Test Suite File](#test-suite-file)
-- [Usage](#usage)
-  - [Flags](#flags)
-- [Example](#example)
-- [Snapshot Testing](#snapshot-testing)
-- [Related Projects / Commands](#related-projects--commands)
-- [Contributing](#contributing)
+- [helm unittest](#helm-unittest)
+  - [Documentation](#documentation)
+  - [Install](#install)
+  - [Get Started](#get-started)
+  - [Test Suite File](#test-suite-file)
+  - [Usage](#usage)
+    - [Flags](#flags)
+  - [Example](#example)
+  - [Snapshot Testing](#snapshot-testing)
+  - [Tests within subchart](#tests-within-subchart)
+  - [Related Projects / Commands](#related-projects--commands)
+  - [License](#license)
+  - [Contributing](#contributing)
+    - [Developing](#developing)
+    - [Building and pushing](#building-and-pushing)
 
 
 ## Install
 
+Download the tarball from [github releases](https://github.com/facultyai/helm-unittest/releases):
+
 ```
-$ helm plugin install https://github.com/lrills/helm-unittest
+wget https://github.com/facultyai/helm-unittest/releases/download/v0.1.5-faculty-1/helm-unittest-macos-0.1.5-faculty-1.tgz
 ```
 
-It will install the latest version of binary into helm plugin directory.
+Extract the tarball:
+
+```
+tar -xzvf helm-unittest-macos-0.1.5-faculty-1.tgz
+```
+
+Move the extracted binary to your path, e.g. `~/bin` and rename it to `helm-unittest`:
+
+```
+mv untt ~/bin/helm-unittest
+```
 
 ## Get Started
 
@@ -155,11 +173,13 @@ MIT
 
 ## Contributing
 
-Issues and PRs are welcome!  
-Before start developing this plugin, you must have [go](https://golang.org/doc/install) and [dep](https://github.com/golang/dep#installation) installed, and run:
+### Developing
+
+Before you start developing this plugin, you must have [go](https://golang.org/doc/install) and [dep](https://github.com/golang/dep#installation) installed.
+
+Clone this repository into `$GOPATH/github.com/lrills/helm-unittest` and run:
 
 ```
-git clone git@github.com:lrills/helm-unittest.git
 cd helm-unittest
 dep ensure
 ```
@@ -177,3 +197,15 @@ UPDATE_SNAPSHOTS=true go test ./unittest/...
 ```
 
 This update the snapshot cache file and please add them before you commit.
+
+### Building and pushing
+
+To publish a github release of our [faculty fork](https://github.com/facultyai/helm-unittest/releases), do followig:
+
+```
+make dist
+```
+
+This will produce 3 `*.tgz` artifacts under `_dist`.
+
+Then upload the artifacts to the github releas page with appropriate tags.
