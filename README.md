@@ -26,6 +26,8 @@ If you are ready for writing tests, check the [DOCUMENT](./DOCUMENT.md) for the 
   - [Related Projects / Commands](#related-projects--commands)
   - [License](#license)
   - [Contributing](#contributing)
+    - [Developing](#developing)
+    - [Building and pushing](#building-and-pushing)
 
 
 ## Install
@@ -171,11 +173,13 @@ MIT
 
 ## Contributing
 
-Issues and PRs are welcome!  
-Before start developing this plugin, you must have [go](https://golang.org/doc/install) and [dep](https://github.com/golang/dep#installation) installed, and run:
+### Developing
+
+Before you start developing this plugin, you must have [go](https://golang.org/doc/install) and [dep](https://github.com/golang/dep#installation) installed.
+
+Clone this repository into `$GOPATH/github.com/lrills/helm-unittest` and run:
 
 ```
-git clone git@github.com:lrills/helm-unittest.git
 cd helm-unittest
 dep ensure
 ```
@@ -193,3 +197,15 @@ UPDATE_SNAPSHOTS=true go test ./unittest/...
 ```
 
 This update the snapshot cache file and please add them before you commit.
+
+### Building and pushing
+
+To publish a github release of our [faculty fork](https://github.com/facultyai/helm-unittest/releases), do followig:
+
+```
+make dist
+```
+
+This will produce 3 `*.tgz` artifacts under `_dist`.
+
+Then upload the artifacts to the github releas page with appropriate tags.
